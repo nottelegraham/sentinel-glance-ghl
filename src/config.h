@@ -125,7 +125,7 @@ inline void setDefaults(Config& c) {
   }
   syncPumpCaps(c);
   c.brightness = 2; c.glowAlarm = true; c.glowOffline = true; c.glowLevel = 1;
-  c.glowPort = 2; c.glowCount = 7; c.powerFromBack = true;   // WS2812 Jewel x7 in the glow back on M-Bus pin 8 (G25), powered through the back
+  c.glowPort = 2; c.glowCount = 7; c.powerFromBack = false;  // USB-C power; glow back builders switch to 5 V into the back on the setup page
   c.beep = true; c.clock24 = false; c.rotateSec = 10;
   c.nightMode = 1; c.nightStart = 22; c.nightEnd = 7;
   c.otaCheck = true;

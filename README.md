@@ -22,7 +22,8 @@ Tested on a ProfiLux Mini (firmware 1.23) and one Master Doser 2.1. The ProfiLux
 ## First setup
 1. Install firmware with one of these:
    - **From source:** plug the Core2 into a Mac or Linux PC and run `./build_and_flash.sh`. The first run installs PlatformIO into `./.venv`.
-   - **Prebuilt:** download `sentinel-glance-full.bin` from the latest [release](../../releases/latest) and flash it at address `0x0` with [esptool](https://github.com/espressif/esptool) or the [ESP Web Tool](https://espressif.github.io/esptool-js/).
+   - **Prebuilt:** download `sentinel-glance-full.bin` from the latest [release](../../releases/latest) and flash it at address `0x0` with [esptool](https://github.com/espressif/esptool) or the [ESP Web Tool](https://espressif.github.io/esptool-js/). The full image erases saved settings, so use it on a new Core2. To update a Glance that's already set up, use OTA or `build_and_flash.sh`.
+   - Once it's running, later versions install over Wi-Fi from the setup page (see Firmware updates).
 2. The Core2 opens a Wi-Fi hotspot, **GHL-Glance-xxxx**. Join it and open **192.168.8.1**.
 3. Pick your network and save. It restarts and joins it.
 4. Open `http://<glance-ip>/` (the IP is under Menu → Network & setup) and add your controllers. For each one, set:
@@ -71,7 +72,9 @@ The setup page has no password. Anyone on your LAN can change settings or instal
 
 The build fails if the tag doesn't match `FW_VERSION`.
 
-## Alarm light (glow back)
+## Alarm light (optional glow back)
+The glow back is optional. Without it the Glance works the same, alarms show on screen and with the beep, and you can leave the NeoPixel settings alone. You can also plug a NeoPixel strip into Port A instead.
+
 The Core2's stock battery bottom is replaced by `case/glance_back.stl`, printed in natural or translucent PETG. A DIYmall WS2812 Jewel x7 (23 mm) sits inside, LEDs facing out, and the whole back glows onto the wall behind the stand:
 - red breathing pulse on an alarm,
 - steady amber when a controller stops answering,
@@ -95,8 +98,8 @@ Power comes in through the back too, so nothing sticks out of the Core2's sides.
    - Feed the plug end in through the 3.4 mm hole next to the power entry and plug it into the Core2's battery socket.
    - Heat-shrink each joint separately.
 5. Pass the M-Bus wires through the 4 mm hole between the M-Bus pocket and the old battery bay. Drop the Jewel LEDs-down into its ring with a dab of hot glue on the rim. Fit the back and refit the four screws.
-6. Firmware: "Power input" on the setup page defaults to **5 V into the back**, and in that mode the Core2 does not drive pin 28.
-   - If you ever run it from the side USB-C instead, switch the setting to USB-C first, or the Jewel won't light.
+6. Firmware: before connecting power to the back, set "Power input" on the setup page to **5 V into the back**. In that mode the Core2 does not drive pin 28.
+   - The default is USB-C, where the Core2 drives its own 5 V onto pin 28 to feed the Jewel.
    - Unplug the back power before plugging USB-C in for flashing.
 
 Red at the highest glow setting draws about 140 mA from the Core2's 5 V rail.
@@ -177,6 +180,9 @@ Mode and hours are in Settings. Exact hours can be typed on the setup page.
 
 ## Hardware cost
 About $58 delivered for the Core2, the Jewel and the printed parts.
+
+## License
+Free for personal, hobby and other noncommercial use under the [PolyForm Noncommercial License 1.0.0](LICENSE). Selling the software, devices built with it, or any part of it requires written permission from TelegrahamTested.
 
 ---
 By TelegrahamTested. Not affiliated with GHL. GHL, ProfiLux and Master Doser are GHL Advanced Technology trademarks.
