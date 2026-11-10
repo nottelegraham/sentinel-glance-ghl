@@ -1,0 +1,7 @@
+.pio/
+.venv/
+.vscode/
+.DS_Store
+*.sflash
+secrets.h
+codec_test
